@@ -1,0 +1,2667 @@
+SudhaBelur-documentation
+# SUDHABELUR
+## Complete Project Documentation
+### Project Juliet | Business, Requirements, Architecture, Design, Development and Deployment
+
+**Document type:** Master Project Documentation  
+**Project name:** SudhaBelur  
+**Internal codename:** Juliet  
+**Business location:** Belur, Hassan, Karnataka, India  
+**Project category:** Boutique, tailoring and embroidery services website  
+**Application type:** Full-stack web application  
+**Frontend:** Next.js  
+**Backend:** Java Spring Boot  
+**Database:** PostgreSQL  
+**Primary users:** Customers and one administrator  
+**Project stage:** MVP development  
+**Document purpose:** To preserve the project's complete history, decisions, scope, requirements, technical architecture, implementation progress and future development plan.
+
+---
+
+# TABLE OF CONTENTS
+
+1. Project Overview
+2. Origin and Evolution of the Project
+3. Business Background
+4. Business Model and Operating Principles
+5. Problem Statement
+6. Project Vision and Objectives
+7. Scope and Boundaries
+8. User Roles and Permissions
+9. Functional Requirements
+10. Customer Journey and Workflows
+11. Administrator Workflow
+12. Product Catalogue and Category Management
+13. Appointment Management
+14. Website Information Architecture
+15. Page-by-Page Requirements
+16. UI/UX and Visual Design Specification
+17. Technology Stack and Rationale
+18. System Architecture
+19. Backend Architecture
+20. Database Design
+21. API and Integration Requirements
+22. Authentication and Security
+23. Data Validation and Error Handling
+24. Hosting and Deployment Strategy
+25. Development Environment and Tools
+26. Development History and Progress
+27. Current Implementation Status
+28. Remaining Development Roadmap
+29. Testing Strategy
+30. Non-Functional Requirements
+31. Risks and Mitigation
+32. Explicitly Excluded Features
+33. Future Enhancements
+34. Open Decisions and Unresolved Questions
+35. Project Acceptance Criteria
+36. Definition of Done
+37. Final Project Summary
+
+---
+
+# 1. PROJECT OVERVIEW
+
+## 1.1 Introduction
+
+SudhaBelur is a website project for a boutique and tailoring business located in Belur, Hassan, Karnataka.
+
+The website is intended to establish a professional digital presence for the business and allow customers to explore available clothing categories, inspect individual products, understand the services offered and request appointments online.
+
+The administrator will manage the product catalogue and appointment requests through a protected administrative interface.
+
+The project combines a customer-facing website with a backend management system. It is intended to be a practical business application rather than a demonstration website that only displays static information.
+
+The website must support two primary activities:
+
+1. **Customer discovery:** Customers browse products, review availability and prices where provided, and request appointments.
+2. **Business administration:** The administrator maintains the catalogue and manually accepts or rejects appointment requests.
+
+The website is designed around the existing business's service model. It is not intended to turn the business into a large online marketplace or automated retail operation.
+
+## 1.2 Project identity
+
+| Attribute | Description |
+|---|---|
+| Official project name | SudhaBelur |
+| Internal codename | Juliet |
+| Business domain | Boutique, tailoring and embroidery |
+| Business location | Belur, Hassan, Karnataka |
+| Application | Full-stack website |
+| Customer interface | Web application |
+| Administration interface | Protected admin workspace |
+| Frontend technology | Next.js |
+| Backend technology | Java Spring Boot |
+| Database technology | PostgreSQL |
+| Primary business workflow | Product discovery and appointment requests |
+| Appointment decisions | Manual administrator approval or rejection |
+| Payment processing | Excluded from the MVP |
+| Delivery management | Excluded from the MVP |
+| Initial deployment objective | Minimize operating costs |
+
+The name **Juliet** is an internal project codename. The customer-facing brand is **SudhaBelur**.
+
+## 1.3 Relationship with other projects
+
+SudhaBelur is an independent project.
+
+It is separate from the personal digital identity project known internally as Romeo. The two projects do not share a business purpose or application scope.
+
+SudhaBelur must be documented, developed and deployed according to its own requirements.
+
+## 1.4 Core product principle
+
+The website should help customers understand what the business offers and request an appointment without forcing the business to adopt an entirely new operating model.
+
+The application should remain simple enough for a small business to maintain while providing a polished customer experience.
+
+The central design principle is:
+
+**A premium customer experience supported by a simple, secure and maintainable backend.**
+
+---
+
+# 2. ORIGIN AND EVOLUTION OF THE PROJECT
+
+This section records how the project's requirements evolved, including ideas that were subsequently narrowed or clarified.
+
+## 2.1 Initial concept
+
+The original concept was to build a professional website for a clothing, tailoring and embroidery business.
+
+The initial vision included a premium homepage, a brand story, a service catalogue, a product catalogue, inquiry forms and an administrative dashboard.
+
+The website was intended to make the business discoverable online and give potential customers a clearer understanding of its offerings.
+
+The initial concept was broader than the final MVP.
+
+## 2.2 Establishing the brand
+
+The project was initially discussed under the internal codename Juliet.
+
+The actual business name was subsequently established as SudhaBelur.
+
+The business is based in Belur, Hassan, Karnataka.
+
+From this point onward, SudhaBelur became the primary name for the website, brand presentation and customer-facing experience.
+
+## 2.3 Clarifying the business model
+
+One of the most important decisions was clarifying that SudhaBelur is not a conventional e-commerce business.
+
+The business does not intend to sell ready-made clothing through an automated online purchasing process.
+
+Instead, customers should be able to browse the catalogue and request an appointment related to a particular product or clothing category.
+
+The administrator then reviews the request and manually approves or rejects it.
+
+This decision changes the entire application design.
+
+A traditional e-commerce application normally requires a cart, checkout, payment processing, order fulfilment and shipping workflows. SudhaBelur does not require these systems for its initial release.
+
+The product catalogue is therefore primarily a discovery and appointment-request interface.
+
+## 2.4 Simplifying the MVP
+
+The project was deliberately reduced to a manageable set of features.
+
+The following became the core MVP:
+
+- Premium business homepage.
+- Product catalogue.
+- Product categories.
+- Product images and descriptions.
+- Optional product prices.
+- Product availability indicators.
+- Appointment request workflow.
+- Contact information.
+- Frequently asked questions.
+- Administrator authentication.
+- Product management.
+- Appointment approval and rejection.
+- PostgreSQL persistence.
+
+The project was not intended to begin with distributed infrastructure or a complex enterprise architecture.
+
+Features such as Redis, Kafka, Elasticsearch, Kubernetes, microservices and extensive deployment automation were explicitly excluded from the initial scope.
+
+The intention was to build a functional, maintainable product first.
+
+## 2.5 Establishing the technology stack
+
+The selected stack became:
+
+- Next.js for the frontend.
+- Java Spring Boot for the backend.
+- PostgreSQL for persistent storage.
+
+The frontend and backend are separate application layers.
+
+The frontend is responsible for rendering the customer experience and administrative interface. The backend is responsible for business rules, authentication, data access and appointment management.
+
+PostgreSQL stores the application's persistent business data.
+
+## 2.6 Moving from a template to a custom design
+
+A premium luxury e-commerce template from v0 was used as an initial reference.
+
+Reference template:
+
+https://v0.app/templates/premium-luxury-e-commerce-template-Umx1e3VQmpL?b=b_BjlUTr5oMC4
+
+The template was not intended to define the final website.
+
+The intended direction was to use it as a starting point for understanding layout and structure, then redesign the actual interface around SudhaBelur's brand, service model and visual preferences.
+
+The imported template and its dependencies were explored, and the Next.js development environment was brought up successfully after installing the required dependencies.
+
+The frontend was subsequently intended to be customized rather than accepted as a finished product.
+
+## 2.7 Building the backend from the ground up
+
+The backend development progressed through database setup and the initial product domain model.
+
+PostgreSQL was installed locally. The `sudhabelur` database was established, and Spring Boot was connected to it.
+
+The `Product` entity and `Category` enum were created, Hibernate successfully created the product table, and `ProductRepository` was completed.
+
+The next recorded backend development step was to create the service layer, beginning with product-related business logic.
+
+This is the last confirmed implementation checkpoint recorded in the project history available for this document. Later progress must be verified before being considered complete.
+
+---
+
+# 3. BUSINESS BACKGROUND
+
+## 3.1 Business description
+
+SudhaBelur is a local boutique and tailoring business focused on clothing-related services.
+
+The business's relevant areas include:
+
+- Blouse stitching.
+- Kurti-related services.
+- Lehenga-related services.
+- Gown-related services.
+- Saree-related services.
+- Salwar-suit-related services.
+- Women's wear.
+- Embroidery services.
+
+The website should present these offerings in a way that is easy for customers to understand.
+
+The exact operational details of each service, such as accepted fabrics, turnaround times, measurement procedures and pricing rules, must reflect the real business and should not be invented by the application.
+
+## 3.2 Digital presence
+
+The website will serve as the business's online point of discovery.
+
+A visitor should be able to determine:
+
+- What SudhaBelur offers.
+- Which product categories are available.
+- Whether an individual catalogue item is currently available.
+- What price has been specified, if any.
+- How to request an appointment.
+- How to contact the business.
+- What to expect from the appointment process.
+
+The website must communicate these details without creating the false impression that customers can complete an online purchase.
+
+## 3.3 Intended business benefits
+
+The project is expected to provide the following benefits:
+
+1. Establish a dedicated online presence.
+2. Present products and services in a consistent format.
+3. Make catalogue updates easier for the administrator.
+4. Reduce the need to communicate every basic product detail individually.
+5. Organize appointment requests in a central location.
+6. Allow the administrator to review requests before confirming appointments.
+7. Improve the consistency of customer-facing information.
+8. Provide a foundation for future improvements without requiring a complete rebuild.
+
+These are intended benefits, not measured business outcomes. Actual improvements would need to be evaluated after the website becomes operational.
+
+---
+
+# 4. BUSINESS MODEL AND OPERATING PRINCIPLES
+
+## 4.1 Service-oriented model
+
+SudhaBelur follows a service-oriented model rather than a conventional online retail model.
+
+The catalogue helps customers discover products and services. The appointment workflow provides a way to express interest and initiate contact.
+
+An appointment request is not automatically a confirmed appointment.
+
+The administrator must explicitly approve or reject the request.
+
+## 4.2 Customer interaction model
+
+The intended flow is:
+
+1. A customer visits the website.
+2. The customer browses the catalogue.
+3. The customer opens a product's details.
+4. The customer chooses to request an appointment.
+5. The customer provides the required information.
+6. The application records the request.
+7. The administrator reviews the request.
+8. The administrator approves or rejects it.
+9. The resulting status is made available through the application's supported customer communication workflow.
+
+The exact method used to notify customers of a decision must be established before that functionality is considered complete.
+
+## 4.3 Product catalogue versus inventory
+
+The catalogue is not intended to represent a sophisticated warehouse inventory system.
+
+Each product has a simple availability indicator.
+
+An unavailable product must remain distinguishable from an available product. The catalogue should show the unavailable status clearly rather than allowing customers to assume the product is available.
+
+The current database design uses a Boolean availability field. This supports a simple available/unavailable distinction.
+
+It does not, by itself, represent quantities, stock movements, reservations or inventory history.
+
+## 4.4 Appointment requests versus orders
+
+An appointment request is not an order.
+
+The application must not imply that:
+
+- A payment has been made.
+- A product has been purchased.
+- A delivery has been scheduled.
+- A tailoring job has been accepted.
+- A particular completion date has been guaranteed.
+
+Those actions are outside the current MVP unless the business explicitly changes its requirements.
+
+## 4.5 Manual business decisions
+
+The administrator retains control over appointment acceptance.
+
+The website assists the business by collecting and organizing requests. It does not replace the administrator's judgment or independently promise a booking.
+
+---
+
+# 5. PROBLEM STATEMENT
+
+A local tailoring and boutique business can benefit from a structured online presence, but a generic retail website may not match its actual operations.
+
+A static website can display information, but it cannot provide a centralized way to manage product availability and appointment requests.
+
+A conventional e-commerce system may introduce unnecessary complexity when the business does not require automated checkout or online payment.
+
+SudhaBelur therefore requires a lightweight full-stack application that combines:
+
+- A polished public website.
+- A manageable product catalogue.
+- An appointment-request workflow.
+- A protected administrative interface.
+- Persistent storage.
+- A clear distinction between requested and confirmed appointments.
+
+The challenge is to provide a high-quality customer experience without building unnecessary infrastructure.
+
+---
+
+# 6. PROJECT VISION AND OBJECTIVES
+
+## 6.1 Vision
+
+To establish SudhaBelur as a professionally presented boutique and tailoring business with a simple digital system for product discovery and appointment management.
+
+## 6.2 Primary objectives
+
+### Objective 1: Customer discovery
+
+Allow visitors to explore clothing categories and individual catalogue items.
+
+### Objective 2: Clear product information
+
+Display product images, names, descriptions, optional prices and availability.
+
+### Objective 3: Appointment requests
+
+Allow customers to submit appointment requests associated with a selected product.
+
+### Objective 4: Administrative control
+
+Allow one authorized administrator to add, edit and remove products and manage appointment requests.
+
+### Objective 5: Data persistence
+
+Store products and appointment information in PostgreSQL.
+
+### Objective 6: Security
+
+Protect administrative operations against unauthorized access and plan for stronger authentication, including two-factor authentication.
+
+### Objective 7: Maintainability
+
+Use a straightforward architecture that can be understood, developed and maintained without unnecessary infrastructure.
+
+### Objective 8: Cost control
+
+Prioritize low-cost development and hosting options until the business has the resources to pay for more expensive services.
+
+## 6.3 Success criteria
+
+The MVP will be successful when a customer can discover a product and submit an appointment request, the administrator can manage the catalogue and make decisions about requests, and the application reliably persists and protects its data.
+
+A visually polished homepage alone does not constitute a completed project.
+
+---
+
+# 7. SCOPE AND BOUNDARIES
+
+## 7.1 In scope
+
+The initial release includes:
+
+- Public homepage.
+- Brand introduction and business information.
+- Product catalogue.
+- Product categories.
+- Product details.
+- Product images.
+- Optional product pricing.
+- Product availability.
+- Appointment request form.
+- Appointment status management.
+- Contact page.
+- FAQ page.
+- Single-administrator authentication.
+- Product creation, editing and deletion.
+- Appointment review, approval and rejection.
+- PostgreSQL persistence.
+- Backend validation.
+- Basic application error handling.
+- Responsive interface.
+- Secure administrative access.
+- Deployment planning and testing.
+
+## 7.2 Outside the MVP
+
+The following are explicitly excluded:
+
+- Online payment processing.
+- Shopping cart and checkout.
+- Automated delivery management.
+- Shipping-label generation.
+- Courier integrations.
+- Marketplace functionality.
+- Multiple administrator accounts.
+- Multi-tenant business management.
+- AI-powered features.
+- Analytics infrastructure.
+- Microservices.
+- Redis.
+- Kafka.
+- Elasticsearch.
+- Kubernetes.
+- Docker as a required initial component.
+- CI/CD as a required initial component.
+
+These exclusions are scope decisions, not claims that such features can never be added.
+
+## 7.3 Important boundary
+
+A product catalogue that contains clothing categories does not automatically make the application an e-commerce platform.
+
+The current business model determines the required functionality. Any feature that implies purchasing, payment or delivery must remain absent until it is explicitly approved as a new requirement.
+
+---
+
+# 8. USER ROLES AND PERMISSIONS
+
+The application has two primary user roles.
+
+## 8.1 Customer
+
+A customer uses the public website to explore the business and request appointments.
+
+Expected capabilities include:
+
+- Browse public pages.
+- View product categories.
+- View product details.
+- Check product availability.
+- View a price when one has been entered.
+- Submit an appointment request.
+- Access contact information.
+- Read FAQs.
+
+The current confirmed MVP does not require customers to have accounts.
+
+Earlier discussions included customer accounts and account deletion. Those ideas were not sufficiently reconciled with the later simplified MVP requirements. They must not be treated as implemented or mandatory until the account model is finalized.
+
+## 8.2 Administrator
+
+There is one administrator.
+
+The administrator is responsible for maintaining the website's business information and responding to appointment requests.
+
+Expected capabilities include:
+
+- Sign in to the administrative interface.
+- Access protected management pages.
+- Add products.
+- Edit product details.
+- Set product availability.
+- Remove products.
+- Review appointment requests.
+- Approve appointments.
+- Reject appointments.
+- Inspect relevant appointment details.
+
+Administrative actions must be enforced by the backend, not merely hidden from unauthorized users in the frontend.
+
+## 8.3 Permission principles
+
+Public visitors must not be able to perform administrative operations.
+
+An administrator must not be able to bypass application validation simply by sending a manually constructed API request.
+
+Each protected operation must verify the administrator's authentication and authorization before changing data.
+
+---
+
+# 9. FUNCTIONAL REQUIREMENTS
+
+The following requirements describe the intended system behavior. They are specifications, not proof that the functionality has already been implemented.
+
+## 9.1 Homepage
+
+The homepage must introduce SudhaBelur and provide clear navigation to the main areas of the website.
+
+It should communicate the business's identity, showcase selected imagery and direct visitors toward the catalogue or appointment process.
+
+The homepage must not rely on fake customer testimonials or fabricated claims about the business.
+
+## 9.2 Product catalogue
+
+The catalogue must present products in an organized, browsable format.
+
+Each product may contain:
+
+- Product name.
+- Category.
+- Description.
+- Price.
+- Availability.
+- One or more images.
+
+A product without an entered price must not display an invented price or an incorrect zero price.
+
+An unavailable product must display the word **Unavailable** in red.
+
+The catalogue must reflect the current database state rather than rely on hardcoded product data in the production application.
+
+## 9.3 Category navigation
+
+The initial supported categories are:
+
+1. BLOUSE
+2. KURTI
+3. LEHENGA
+4. GOWN
+5. SAREE
+6. SALWAR_SUIT
+7. WOMEN_WEAR
+
+These categories correspond to the existing backend category model and database constraint.
+
+The customer-facing interface may use more readable labels, such as "Salwar Suit" instead of `SALWAR_SUIT`.
+
+The initial scope does not include deleting categories.
+
+## 9.4 Product details
+
+Opening a product should reveal enough information for the customer to understand the item and decide whether to request an appointment.
+
+Product details should include the product's name, category, description, images, availability and price when specified.
+
+The appointment action should be clearly associated with the selected product.
+
+## 9.5 Appointment request
+
+The application must provide a way for customers to request an appointment.
+
+The confirmed core requirement is that the request includes the customer's name, phone number and selected product or service.
+
+The exact set of additional fields, such as preferred date, preferred time, comments or alternate contact details, remains to be finalized.
+
+Submitting a request must create a persisted record and return a clear result to the customer.
+
+The application must not report success if the backend has failed to save the request.
+
+## 9.6 Product administration
+
+The administrator must be able to create, edit and delete catalogue products.
+
+The product form must support the fields defined by the product model.
+
+The administrator must be able to change product availability.
+
+The application must validate required fields and reject invalid category values.
+
+## 9.7 Appointment administration
+
+The administrator must be able to view incoming requests and inspect their details.
+
+The administrator must be able to approve or reject a request.
+
+The application must persist the decision and the resulting appointment status.
+
+The exact policy for modifying a previously approved or rejected request remains an open business rule.
+
+## 9.8 Contact page
+
+The Contact Us page must display the business's approved contact information.
+
+The exact phone number, email address, opening hours and map information must come from verified business details.
+
+These details must not be invented during development.
+
+## 9.9 FAQ page
+
+The FAQ page must answer common questions about the business and its appointment process.
+
+The content should be consistent with the actual services offered.
+
+Questions about payment, delivery, appointment confirmation, pricing and turnaround times must be answered only after the business's policies have been confirmed.
+
+---
+
+# 10. CUSTOMER JOURNEY AND WORKFLOWS
+
+## 10.1 Customer discovery workflow
+
+1. The customer opens the website.
+2. The homepage introduces the brand.
+3. The customer selects Shop.
+4. The customer browses the available categories.
+5. The customer opens a product.
+6. The customer checks the product's details and availability.
+7. The customer decides whether to request an appointment.
+
+The process should require as few unnecessary steps as possible.
+
+## 10.2 Appointment request workflow
+
+1. The customer selects the appointment action for a product.
+2. The application opens an appointment form or dialog.
+3. The selected product is identified in the form.
+4. The customer provides their name and phone number.
+5. The customer supplies any other required information.
+6. The frontend validates basic input.
+7. The backend validates the request again.
+8. The backend stores the appointment request.
+9. The application displays a submission confirmation.
+10. The administrator reviews the request.
+
+The request must not be treated as confirmed merely because it was submitted.
+
+## 10.3 Appointment state model
+
+The initial workflow requires at least three states:
+
+| State | Meaning |
+|---|---|
+| Pending | The request has been submitted and awaits a decision |
+| Approved | The administrator has accepted the request |
+| Rejected | The administrator has declined the request |
+
+A more advanced status model is not required for the MVP.
+
+The application must distinguish the current status from the historical fact that a request was submitted.
+
+## 10.4 Product unavailable workflow
+
+When a product is unavailable:
+
+- The catalogue displays its unavailable status in red.
+- The application does not represent it as currently available.
+- The customer is not misled about its status.
+- The business may still display the product for informational purposes.
+
+Whether appointment requests should be disabled for unavailable products is a separate business rule that must be confirmed. A frontend-only restriction would not be sufficient; the backend must enforce the final policy.
+
+## 10.5 Error workflow
+
+If an appointment cannot be saved:
+
+- The customer must receive a clear error message.
+- The application must not show a false success confirmation.
+- The entered information should not be discarded unnecessarily.
+- The backend should record sufficient diagnostic information without logging sensitive customer details indiscriminately.
+
+---
+
+# 11. ADMINISTRATOR WORKFLOW
+
+## 11.1 Sign-in
+
+The administrator opens the protected administrative area and authenticates.
+
+The backend verifies the credentials and any additional authentication requirements.
+
+Only authorized access should allow entry into the administrative workspace.
+
+## 11.2 Product management
+
+The administrator can create a new product by entering the required product information.
+
+The administrator can subsequently update the name, category, description, price, availability and images.
+
+The administrator can remove a product when it should no longer appear in the catalogue.
+
+Changes must be persisted to PostgreSQL and reflected in the public website.
+
+## 11.3 Appointment management
+
+The administrator opens the appointment management area.
+
+Each request should display enough information to identify the request, including the customer, associated product or service, submission time and current status.
+
+The administrator reviews the request and chooses approval or rejection.
+
+The system updates the status and makes the decision available to the relevant application workflows.
+
+## 11.4 Product deletion and related appointments
+
+An earlier requirement specified that deleting a product should delete its associated pending and rejected appointment records.
+
+This requirement needs particular care.
+
+A broad cascade-delete rule can unintentionally erase business records, especially when an appointment has already been approved.
+
+The original deletion requirement should therefore be treated as a policy requiring confirmation before implementation. It must not be applied indiscriminately to every appointment state.
+
+A safer design would preserve historical records and prevent deletion when business obligations remain. If the original deletion behavior is retained, it must be narrowly defined, explicitly confirmed and tested.
+
+## 11.5 Administrative usability
+
+The administrative interface should prioritize practical work rather than decorative complexity.
+
+The administrator should be able to identify pending requests quickly, inspect the relevant details and complete routine product updates without navigating through unrelated sections.
+
+---
+
+# 12. PRODUCT CATALOGUE AND CATEGORY MANAGEMENT
+
+## 12.1 Product data model
+
+The current database product table contains these fields:
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique product identifier |
+| `name` | Product name |
+| `category` | Product category |
+| `description` | Product description |
+| `price` | Optional product price |
+| `available` | Availability flag |
+| `created_at` | Creation timestamp |
+| `updated_at` | Last-update timestamp |
+
+The exact nullability rules, timestamp behavior and validation requirements should be verified against the current database schema and entity definitions.
+
+## 12.2 Product identifiers
+
+The product table uses a `bigint` identity column for its primary key.
+
+The identifier is generated by the database rather than manually selected by the administrator.
+
+## 12.3 Price handling
+
+The original requirement allows product prices to be left blank when no price has been entered.
+
+The application must distinguish a missing price from a price of zero.
+
+A zero price is a numeric value. A missing price means the business has not specified a value for that product.
+
+The frontend should therefore render a price only when an actual price exists.
+
+The current database uses a numeric price field. Whether it permits null values must be checked before relying on this behavior.
+
+## 12.4 Availability
+
+The product table uses a Boolean `available` field.
+
+This is appropriate for the initial two-state availability requirement.
+
+The customer interface must translate the stored value into understandable language.
+
+- Available products should be presented as available.
+- Unavailable products should show **Unavailable** in red.
+
+The visual distinction must remain understandable without relying on color alone.
+
+## 12.5 Product images
+
+Each product may have one or more images.
+
+The current recorded product table does not contain an image field.
+
+Therefore, image storage and retrieval remain a necessary design and implementation task.
+
+The final approach must support multiple images per product without forcing image binaries into the main product record.
+
+The storage mechanism, image metadata, upload restrictions and image deletion policy have not yet been confirmed.
+
+## 12.6 Category validation
+
+The database has a category check constraint that restricts values to the seven supported categories.
+
+This protects the database against unsupported category values.
+
+Validation should also occur in the backend before persistence so that customers and administrators receive meaningful errors rather than database constraint failures.
+
+The initial scope does not include deleting categories.
+
+---
+
+# 13. APPOINTMENT MANAGEMENT
+
+## 13.1 Purpose
+
+The appointment subsystem is responsible for collecting customer requests and allowing the administrator to decide how to handle them.
+
+It is one of the two primary functional components of the MVP, alongside product management.
+
+## 13.2 Minimum appointment information
+
+The confirmed minimum information includes:
+
+- Customer name.
+- Customer phone number.
+- Associated product or service.
+- Request status.
+
+The application will also need a unique appointment identifier and a submission timestamp for reliable record management.
+
+These are design requirements for the appointment subsystem; the appointment table's current implementation status has not been confirmed.
+
+## 13.3 Additional fields requiring a decision
+
+Potential fields include:
+
+- Preferred appointment date.
+- Preferred appointment time.
+- Customer comments.
+- Creation timestamp.
+- Decision timestamp.
+- Reason for rejection.
+
+Only fields justified by the real appointment process should be implemented.
+
+In particular, a preferred date and time are useful only if the business intends customers to specify them when submitting a request.
+
+## 13.4 Appointment status rules
+
+New requests should begin in the pending state.
+
+Only the administrator should be able to approve or reject them.
+
+Status changes must be persisted and validated by the backend.
+
+The system must not silently convert a pending request into an approved appointment.
+
+## 13.5 Concurrency and duplicate submissions
+
+The backend should account for repeated submissions, including accidental double-clicks and network retries.
+
+A repeated request must not silently create multiple appointments when the application can reasonably prevent the duplication.
+
+The exact duplicate-detection policy must be designed around the information collected. Two requests from the same phone number may represent legitimate separate appointments, so the phone number alone should not be used as a universal uniqueness key.
+
+## 13.6 Customer notification
+
+The system needs a clear way for customers to understand whether their request was submitted and whether the administrator has made a decision.
+
+The initial requirement establishes manual administrator approval or rejection, but it does not establish an implemented SMS, email or messaging integration.
+
+A submission confirmation can be provided directly on the website. Notifications about later status changes require a separately selected delivery mechanism.
+
+---
+
+# 14. WEBSITE INFORMATION ARCHITECTURE
+
+## 14.1 Primary navigation
+
+The intended top-level navigation is:
+
+- Home
+- Shop
+- Contact Us
+- FAQs
+
+The administrative workspace is a separate protected area and should not be confused with the primary customer navigation.
+
+## 14.2 Public page structure
+
+The initial website consists of:
+
+1. Home page.
+2. Shop or catalogue page.
+3. Product details or product-selection interface.
+4. Appointment request interface.
+5. Contact Us page.
+6. FAQs page.
+
+A separate, extensive service-management portal is not required for the MVP.
+
+## 14.3 Administrative page structure
+
+The administrative area should provide:
+
+- Sign-in.
+- Product management.
+- Product creation and editing.
+- Appointment list.
+- Appointment detail view.
+- Appointment approval and rejection.
+
+The final layout can be organized as a dashboard, but the essential requirement is reliable access to these functions.
+
+## 14.4 Navigation principles
+
+Navigation should be predictable.
+
+Customers should be able to reach the catalogue and contact information easily.
+
+The appointment action should be accessible from the relevant product context.
+
+Administrative routes must be protected on the server or backend. Hiding links from unauthenticated visitors is not sufficient security.
+
+---
+
+# 15. PAGE-BY-PAGE REQUIREMENTS
+
+## 15.1 Home page
+
+The homepage should establish the identity of SudhaBelur.
+
+It should include:
+
+- Brand presentation.
+- A concise explanation of the business.
+- High-quality, relevant imagery.
+- A prominent path to the Shop section.
+- A way to contact the business.
+- A clear introduction to the appointment process.
+
+The homepage should feel premium and intentional rather than like a generic online shop.
+
+The exact copy, imagery and brand story must be approved against the real business.
+
+## 15.2 Shop page
+
+The Shop page is the primary product-discovery interface.
+
+It should provide:
+
+- Category navigation.
+- Product listings.
+- Product images.
+- Product names.
+- Descriptions or brief product summaries.
+- Optional prices.
+- Availability indicators.
+- Appointment actions.
+
+The catalogue should handle loading, empty and error states.
+
+A product should not disappear from the interface simply because its price has not been entered.
+
+## 15.3 Product selection
+
+When a customer selects a product, the application should present the relevant details and appointment action.
+
+The selected product must be carried into the appointment request so the administrator can identify what the customer is interested in.
+
+The application must not rely on an untrusted product name supplied by the customer when the product identifier can be verified by the backend.
+
+## 15.4 Appointment interface
+
+The appointment form should be concise and easy to complete.
+
+It must:
+
+- Identify the selected product.
+- Collect the required customer information.
+- Validate required fields.
+- Display useful validation messages.
+- Prevent accidental duplicate submission where practical.
+- Report whether submission succeeded.
+
+The form's final field list depends on the appointment policy.
+
+## 15.5 Contact Us page
+
+The Contact Us page should contain verified contact information and any approved business-location details.
+
+The application should not invent a phone number, email address, opening schedule or map coordinates.
+
+## 15.6 FAQs page
+
+The FAQ page should provide practical information about services, appointments, availability and contact methods.
+
+Its content must reflect real business policies.
+
+## 15.7 Administrator sign-in
+
+The sign-in page must provide a clear authentication flow.
+
+It should not expose administrator credentials, internal database information or sensitive implementation details.
+
+Errors should be informative without revealing whether a particular password or secret is correct.
+
+## 15.8 Product management page
+
+The product management page should provide a structured list of products and actions to create, edit or remove them.
+
+Forms should use clear labels, appropriate input types and explicit validation feedback.
+
+## 15.9 Appointment management page
+
+The appointment page should prioritize requests awaiting review.
+
+The administrator must be able to distinguish pending, approved and rejected requests.
+
+Actions that change appointment status should be explicit and should provide feedback after the backend confirms the change.
+
+---
+
+# 16. UI/UX AND VISUAL DESIGN SPECIFICATION
+
+## 16.1 Design direction
+
+SudhaBelur is intended to have a premium, luxury-oriented visual identity.
+
+The design should be contemporary, elegant, restrained and appropriate for a boutique and tailoring business.
+
+The original template is a reference, not the final design specification.
+
+## 16.2 Design priorities
+
+The interface should prioritize:
+
+1. Strong visual hierarchy.
+2. High-quality product photography.
+3. Readable typography.
+4. Consistent spacing.
+5. Clear navigation.
+6. Simple appointment actions.
+7. Mobile responsiveness.
+8. Accessible controls.
+9. Consistent visual treatment across pages.
+10. A clear distinction between customer-facing and administrative experiences.
+
+## 16.3 Explicit visual exclusions
+
+The following design elements were explicitly prohibited for the SudhaBelur frontend:
+
+- Harsh gradients.
+- Lucide icons.
+- Pure white backgrounds.
+- Rainbow coloring.
+- Drop shadows.
+- Three-feature cards arranged in a row.
+- Emojis used as interface decoration.
+- Liquid-glass effects.
+- Em dashes.
+- Inter, Geist and Space Grotesk fonts.
+- Colored left-side stripes used as decorative UI elements.
+- Fake testimonials.
+- Bento grids.
+- Terminal-window styling.
+- The phrase structure "it's not X, it..." as a design-copy convention.
+
+These are project-specific constraints and should be retained in future design prompts and reviews.
+
+## 16.4 Color and background
+
+The interface should use a controlled, cohesive palette suitable for a premium brand.
+
+Pure white backgrounds are excluded by the existing design constraints.
+
+The exact palette has not been finalized in the available project record and should be documented once approved.
+
+Color must communicate information consistently. The unavailable state must use red as specified, while remaining readable for users who cannot distinguish colors reliably.
+
+## 16.5 Typography
+
+Typography should be selected deliberately rather than inherited blindly from a template.
+
+The excluded font families must not be introduced during redesign.
+
+The final font selection should be consistent across headings, body text, labels and buttons.
+
+## 16.6 Imagery
+
+Product and brand imagery should be relevant to the business.
+
+The design should avoid excessive visual effects that compete with the actual clothing and tailoring work.
+
+Images should have suitable aspect ratios, predictable cropping and responsive sizing.
+
+## 16.7 Motion and animation
+
+Animation is not a primary business requirement.
+
+If motion is introduced, it should support navigation or feedback rather than distract from the content.
+
+The website should remain usable when animations are unavailable or reduced.
+
+## 16.8 Responsive design
+
+The public website must function on desktop and mobile screens.
+
+The catalogue, product details and appointment form should remain usable on narrow screens.
+
+The administrator's essential actions should also be accessible on smaller screens, although the administrative interface may prioritize desktop usability.
+
+## 16.9 Accessibility
+
+The interface should use semantic page structure, readable text, visible keyboard focus, descriptive form labels and meaningful error messages.
+
+Buttons must have clear purposes.
+
+Important states must not be communicated through color alone.
+
+Product images should have appropriate alternative text.
+
+---
+
+# 17. TECHNOLOGY STACK AND RATIONALE
+
+## 17.1 Frontend: Next.js
+
+Next.js is the selected frontend framework.
+
+It provides the application structure for the public website and administrative interface.
+
+Its responsibilities include:
+
+- Rendering public pages.
+- Displaying catalogue data.
+- Handling navigation.
+- Collecting form input.
+- Presenting validation and error states.
+- Communicating with the backend API.
+- Rendering administrative views.
+
+The frontend must not be treated as the authoritative security boundary. Business rules and protected data operations belong in the backend.
+
+## 17.2 Backend: Java Spring Boot
+
+Java Spring Boot is the selected backend framework.
+
+It provides the application layer responsible for business operations and data access.
+
+Its responsibilities include:
+
+- Exposing application endpoints.
+- Validating incoming requests.
+- Applying product and appointment rules.
+- Enforcing administrative authorization.
+- Coordinating database operations.
+- Returning structured responses.
+- Handling expected application errors.
+
+The existing development approach is to build the backend from the ground up using conventional layers.
+
+## 17.3 Database: PostgreSQL
+
+PostgreSQL is the selected relational database.
+
+It stores structured business information such as products and appointment requests.
+
+The database provides:
+
+- Persistent storage.
+- Primary-key constraints.
+- Data types.
+- Relational integrity.
+- Category validation through the existing check constraint.
+- Transactional operations where required.
+
+PostgreSQL is appropriate for the current MVP without requiring a separate distributed data infrastructure.
+
+## 17.4 Persistence: Spring Data JPA and Hibernate
+
+The current backend uses a JPA-style entity and repository approach, with Hibernate involved in schema creation.
+
+The `Product` entity represents product data in Java.
+
+`ProductRepository` provides the repository layer for product persistence.
+
+Hibernate successfully created the product table during development.
+
+The service layer should centralize business rules instead of placing every decision directly inside controllers.
+
+## 17.5 Development tools
+
+The recorded environment includes:
+
+- Windows.
+- Visual Studio Code.
+- Node.js and npm.
+- Java development tooling.
+- Spring Boot.
+- PostgreSQL.
+- The PostgreSQL command-line client, `psql`.
+- Git and GitHub for source management.
+
+The exact versions of Next.js, Java, Spring Boot, PostgreSQL and the other dependencies should be recorded from the project's actual configuration files.
+
+## 17.6 Why the initial stack is intentionally simple
+
+The application does not currently require multiple independently deployed backend services.
+
+It does not require a message broker or a search cluster to perform its core operations.
+
+A conventional Next.js frontend, Spring Boot backend and PostgreSQL database provide a suitable starting point.
+
+The priority is correctness, security, maintainability and a working business workflow rather than infrastructure complexity.
+
+---
+
+# 18. SYSTEM ARCHITECTURE
+
+## 18.1 Architectural overview
+
+The intended architecture consists of three primary layers.
+
+### Layer 1: Presentation
+
+The Next.js application presents the customer website and the protected administrative interface.
+
+It collects input and displays results from the backend.
+
+### Layer 2: Application and business logic
+
+The Spring Boot application validates requests, applies business rules, enforces authorization and coordinates persistence.
+
+### Layer 3: Data persistence
+
+PostgreSQL stores products and, once implemented, appointment records and other required business data.
+
+## 18.2 Logical request flow
+
+A typical product catalogue request follows this sequence:
+
+1. The browser requests the Shop page.
+2. The Next.js application requests product data from the backend.
+3. The backend receives the API request.
+4. The application service performs the required operation.
+5. The repository retrieves data from PostgreSQL.
+6. The backend returns the result.
+7. The frontend renders the product catalogue.
+
+An appointment request follows a similar path, except that the backend validates the submitted information and creates a new record.
+
+An administrative action must additionally pass authentication and authorization checks.
+
+## 18.3 Architectural boundaries
+
+The frontend is responsible for presentation, not authoritative business enforcement.
+
+The controller is responsible for handling the HTTP request and response, not for containing the entire business logic.
+
+The service layer is responsible for application rules and orchestration.
+
+The repository layer is responsible for database access.
+
+The database is responsible for enforcing its defined integrity constraints.
+
+These boundaries help keep the project understandable and reduce accidental coupling.
+
+## 18.4 Architecture diagram
+
+Browser  
+↓  
+Next.js frontend  
+↓  
+Spring Boot REST API  
+↓  
+Service layer  
+↓  
+Repository layer  
+↓  
+PostgreSQL database
+
+Administrative requests pass through the same backend boundary but require appropriate authorization before protected operations are executed.
+
+## 18.5 Deployment boundary
+
+During local development, the frontend, backend and database may run as separate local processes.
+
+In deployment, the frontend and backend may use different hosting services, with PostgreSQL hosted on a managed database service or another suitable environment.
+
+The exact production providers and connection arrangements have not yet been finalized.
+
+---
+
+# 19. BACKEND ARCHITECTURE
+
+## 19.1 Layered structure
+
+The intended backend follows a conventional layered structure.
+
+### Entity layer
+
+Defines the application's persistent domain objects.
+
+The `Product` entity already exists.
+
+### Enum layer
+
+Defines controlled sets of values used by the domain model.
+
+The `Category` enum already exists.
+
+### Repository layer
+
+Provides database access.
+
+`ProductRepository` has been created and completed.
+
+### Service layer
+
+Contains business operations and validation that involve application rules.
+
+This is the next recorded development stage.
+
+### Controller layer
+
+Exposes the backend functionality through HTTP endpoints.
+
+The product and appointment API implementation status must be verified separately.
+
+### Security layer
+
+Protects administrative endpoints and establishes the authentication and authorization model.
+
+The final security implementation remains to be verified.
+
+## 19.2 Product service responsibilities
+
+The product service should eventually handle:
+
+- Product creation.
+- Product updates.
+- Product retrieval.
+- Product listing.
+- Product deletion.
+- Category validation.
+- Availability changes.
+- Price validation.
+- Handling nonexistent product identifiers.
+
+The service should ensure that invalid operations fail in a controlled and predictable way.
+
+## 19.3 Appointment service responsibilities
+
+The appointment service should eventually handle:
+
+- Request creation.
+- Request validation.
+- Product association.
+- Initial status assignment.
+- Appointment listing for the administrator.
+- Request approval.
+- Request rejection.
+- Invalid status transitions.
+- Appropriate transaction handling.
+
+The appointment service must not automatically approve a request merely because the submission succeeded.
+
+## 19.4 Controller responsibilities
+
+Controllers should accept validated request data, invoke the relevant service and return an appropriate HTTP response.
+
+Controllers should not contain unnecessary database logic or duplicate the service's business rules.
+
+## 19.5 Error handling
+
+The backend should provide consistent responses for:
+
+- Invalid input.
+- Missing products.
+- Missing appointments.
+- Unauthorized requests.
+- Forbidden operations.
+- Duplicate or conflicting operations.
+- Database failures.
+- Unexpected internal errors.
+
+Internal stack traces and sensitive implementation details must not be exposed to public users.
+
+---
+
+# 20. DATABASE DESIGN
+
+## 20.1 Database identification
+
+The development database is named `sudhabelur`.
+
+PostgreSQL was installed locally, and the application was connected to the database during development.
+
+The recorded local PostgreSQL server used port `5432`.
+
+The database was inspected through `psql`, and the product table was confirmed to exist.
+
+## 20.2 Existing products table
+
+The recorded table is `public.products`.
+
+Its columns are:
+
+| Column | Type | Recorded purpose |
+|---|---|---|
+| `id` | `bigint` | Primary key, identity-generated |
+| `available` | `boolean` | Product availability |
+| `category` | `varchar(255)` | Product category |
+| `created_at` | `timestamp` | Record creation time |
+| `description` | `varchar(255)` | Product description |
+| `name` | `varchar(255)` | Product name |
+| `price` | `numeric(38,2)` | Product price |
+| `updated_at` | `timestamp` | Last-update time |
+
+This is the recorded schema at the time of the latest confirmed checkpoint. The live schema may have changed since then.
+
+## 20.3 Primary key
+
+The product table has a primary-key constraint named `products_pkey`.
+
+It uses a B-tree index on the `id` column.
+
+The identifier is generated by the database.
+
+## 20.4 Category constraint
+
+The table contains a category check constraint named `products_category_check`.
+
+The constraint restricts category values to:
+
+- BLOUSE
+- KURTI
+- LEHENGA
+- GOWN
+- SAREE
+- SALWAR_SUIT
+- WOMEN_WEAR
+
+The constraint prevents unsupported category values from being stored in the product table.
+
+## 20.5 Price representation
+
+The database uses a numeric field with two decimal places for the product price.
+
+This is appropriate for monetary values.
+
+However, the application must separately establish whether the field allows null values, whether negative prices are rejected and how values are formatted for display.
+
+The current requirement is to leave the displayed price blank when no price has been specified.
+
+## 20.6 Timestamp handling
+
+The product table contains `created_at` and `updated_at`.
+
+The application should establish a consistent policy for setting and updating these values.
+
+The actual timezone strategy and automatic-update behavior should be verified rather than assumed.
+
+## 20.7 Appointment table
+
+An appointment table is required for the intended application, but its implementation has not been confirmed in the recorded development checkpoint.
+
+The table should store the appointment identifier, customer details, associated product or service, request status and required timestamps.
+
+The final schema should be designed after the business rules and product-deletion policy are settled.
+
+## 20.8 Product image storage
+
+The current products table does not contain a recorded image field.
+
+A separate image metadata model or equivalent structure is therefore needed if products support multiple images.
+
+The image data itself may be stored in a suitable object-storage service while PostgreSQL stores the relevant metadata and references.
+
+The final choice has not been established.
+
+## 20.9 Relational integrity
+
+Appointment records associated with products require an explicit deletion policy.
+
+Blindly cascading every product deletion into appointment deletion can destroy useful historical records.
+
+The database design should protect the integrity of existing appointments and reflect the business's approved retention rules.
+
+## 20.10 Database schema management
+
+Hibernate created the product table during development.
+
+The project should establish a controlled schema-change strategy before production deployment.
+
+Automatic schema creation is useful during initial development, but production database changes should be deliberate and reviewable.
+
+---
+
+# 21. API AND INTEGRATION REQUIREMENTS
+
+## 21.1 API purpose
+
+The frontend and backend need a defined communication contract.
+
+The API must provide the operations required to display products, submit appointments and perform authorized administrative actions.
+
+The following is a logical endpoint specification, not a claim that these routes already exist.
+
+## 21.2 Public product operations
+
+The public API will need operations to:
+
+- List available catalogue data.
+- Filter or browse products by category.
+- Retrieve a product by identifier.
+- Return product availability.
+- Return product pricing when specified.
+
+Whether unavailable products are included in the general catalogue response should be consistent with the agreed catalogue policy.
+
+## 21.3 Appointment operations
+
+The appointment API will need operations to:
+
+- Submit an appointment request.
+- Validate the associated product.
+- Retrieve request status where supported.
+- Allow the administrator to list requests.
+- Allow the administrator to inspect a request.
+- Allow the administrator to approve a request.
+- Allow the administrator to reject a request.
+
+Administrative appointment operations must require authorization.
+
+Customer access to appointment records must follow an explicitly chosen identity and privacy model.
+
+## 21.4 Product administration operations
+
+The protected product API will need operations to:
+
+- Create a product.
+- Update a product.
+- Change availability.
+- Remove a product when allowed.
+- Upload or associate product images once image handling is implemented.
+
+The backend must validate the product category and other fields regardless of the validation performed in the frontend.
+
+## 21.5 API response behavior
+
+Responses should communicate success and failure clearly.
+
+Invalid input should not be reported as a successful operation.
+
+A missing resource should be distinguishable from an authentication failure.
+
+The frontend should handle expected API failures without exposing raw internal exceptions to the user.
+
+## 21.6 CORS and configuration
+
+If the frontend and backend are hosted on different origins, the backend must allow requests only from the intended frontend origins.
+
+The database credentials and authentication secrets must be supplied through secure configuration rather than embedded in public frontend code or committed to the repository.
+
+---
+
+# 22. AUTHENTICATION AND SECURITY
+
+## 22.1 Security objective
+
+The administrative interface controls product information and appointment decisions.
+
+Unauthorized users must not be able to access these capabilities merely by discovering an endpoint or navigating directly to an administrative URL.
+
+## 22.2 Single administrator
+
+The current business requirement is for one administrator.
+
+The MVP does not require a general multi-user administrative platform.
+
+The security model should be designed around one authorized administrative identity while avoiding unnecessary complexity.
+
+## 22.3 Authentication
+
+The application needs a secure way to verify the administrator's identity.
+
+The exact authentication mechanism and credential-provisioning process must be finalized.
+
+If passwords are used, they must be stored using an appropriate password-hashing mechanism. Plaintext passwords must never be stored.
+
+## 22.4 Two-factor authentication
+
+Strong administrative security, including two-factor authentication, was explicitly requested.
+
+SMS-based one-time passwords were discussed as a possible method.
+
+However, the actual 2FA implementation and SMS provider have not been confirmed.
+
+The system should not be described as having 2FA until the feature is implemented and tested.
+
+A suitable 2FA design must address OTP expiry, single-use behavior, attempt limits, replay prevention and recovery procedures.
+
+## 22.5 Authorization
+
+Administrative authorization must be enforced by the backend.
+
+Every protected operation must verify the authenticated identity and required permissions.
+
+A frontend route guard is useful for user experience but is not a replacement for backend authorization.
+
+## 22.6 Session and token security
+
+The final authentication mechanism must define how authentication state is maintained.
+
+If browser cookies are used, the application should configure suitable security attributes and address cross-site request risks where applicable.
+
+If bearer tokens are used, token storage, expiry, revocation and refresh behavior must be designed deliberately.
+
+These decisions should be based on the selected implementation rather than copied from an unrelated tutorial.
+
+## 22.7 Input validation
+
+All user input must be validated on the backend.
+
+Examples include:
+
+- Customer name.
+- Phone number.
+- Product name.
+- Product description.
+- Category.
+- Price.
+- Appointment identifier.
+- Appointment status.
+
+Validation should include reasonable length limits and appropriate data types.
+
+## 22.8 Abuse prevention
+
+The appointment endpoint is publicly accessible by design, so it may attract automated or repeated submissions.
+
+The initial implementation should at least consider reasonable request limits, validation, duplicate-submission handling and monitoring of unusual activity.
+
+These protections should be proportionate to the small MVP rather than introducing a large infrastructure dependency.
+
+## 22.9 Secrets and database access
+
+Database credentials, application secrets and authentication keys must not be exposed in frontend bundles or public repositories.
+
+The production database should not be directly accessible from the public internet unless the hosting architecture explicitly requires it and access is restricted appropriately.
+
+## 22.10 Logging and privacy
+
+Logs should help diagnose application failures without unnecessarily recording customer phone numbers, passwords, OTPs or authentication secrets.
+
+Administrative actions should produce enough information to diagnose unexpected changes, while keeping the logging design proportionate to the MVP.
+
+---
+
+# 23. DATA VALIDATION AND ERROR HANDLING
+
+## 23.1 Product validation
+
+Product validation should cover:
+
+- Required product name.
+- Valid category.
+- Valid price when provided.
+- Valid availability value.
+- Description length.
+- Valid image files when uploads are supported.
+
+The exact maximum lengths should match the final database schema and user-interface design.
+
+## 23.2 Appointment validation
+
+Appointment validation should cover:
+
+- Required customer name.
+- Required phone number.
+- Valid associated product or service.
+- Valid initial status.
+- Any required appointment date or time fields, if selected.
+- Request size and field-length limits.
+
+## 23.3 Consistency
+
+The same business rule should not be implemented differently in multiple layers.
+
+The frontend may provide immediate feedback, but the backend must remain authoritative.
+
+Database constraints should provide a final integrity safeguard.
+
+## 23.4 User-facing messages
+
+Messages should describe what the user can do next.
+
+Examples include:
+
+- A required field is missing.
+- The selected product cannot be found.
+- The request could not be submitted.
+- The appointment request has been received.
+- The appointment status has been updated.
+
+Sensitive internal details should not be included in these messages.
+
+---
+
+# 24. HOSTING AND DEPLOYMENT STRATEGY
+
+## 24.1 Cost objective
+
+The project has no established hosting budget.
+
+The stated priority is to keep the website available at minimal cost until the business can afford more expensive infrastructure.
+
+Free hosting was preferred during the early development stage.
+
+## 24.2 Frontend hosting
+
+Vercel was considered as a potential hosting option for the Next.js frontend.
+
+The suitability of any deployment provider must be checked against its current free-tier limits, commercial-use terms, build requirements and operational restrictions.
+
+A development environment working locally does not establish that production deployment will be free.
+
+## 24.3 Backend hosting
+
+The Spring Boot backend requires a runtime environment capable of running the Java application and connecting securely to PostgreSQL.
+
+The final backend hosting provider has not been confirmed.
+
+The selected service must be evaluated for:
+
+- Free-tier availability, if applicable.
+- Sleep or inactivity behavior.
+- Memory and CPU limits.
+- Deployment requirements.
+- Environment-variable configuration.
+- Network access to the database.
+- Logs and diagnostics.
+- Commercial-use terms.
+
+## 24.4 Database hosting
+
+PostgreSQL is currently running locally during development.
+
+A production deployment will require a reachable production database.
+
+The choice between a managed PostgreSQL provider and another suitable hosting arrangement remains open.
+
+The production database must not be assumed to be the local `sudhabelur` database.
+
+## 24.5 Environment separation
+
+The application should distinguish between local development and production configuration.
+
+Production secrets must not be copied into public source files.
+
+The application must use the correct backend and database configuration for each environment.
+
+## 24.6 Production readiness
+
+Before launch, the deployment must be tested for:
+
+- Correct frontend-to-backend communication.
+- Correct database connectivity.
+- Authentication behavior.
+- Product creation and updates.
+- Appointment submission.
+- Appointment approval and rejection.
+- Error handling.
+- Responsive rendering.
+- Persistent storage.
+- Secret management.
+
+## 24.7 Backups and recovery
+
+The production database will contain business and customer information.
+
+A backup and recovery strategy must be established before the application becomes operational.
+
+The precise backup schedule, retention period and recovery process remain to be decided.
+
+---
+
+# 25. DEVELOPMENT ENVIRONMENT AND TOOLS
+
+## 25.1 Frontend environment
+
+The frontend project was created using Next.js.
+
+The project dependencies were installed, and the development setup was successfully started after an earlier dependency-installation step.
+
+The frontend was being prepared for further customization.
+
+The current directory structure and the state of the imported template should be checked against the actual repository before additional development begins.
+
+## 25.2 Backend environment
+
+The backend was created in a `backend` directory.
+
+Java and Spring Boot are used for the backend application.
+
+The backend was connected to PostgreSQL.
+
+## 25.3 PostgreSQL environment
+
+PostgreSQL was installed locally.
+
+The `psql` command-line client was used to inspect the database.
+
+The `sudhabelur` database was confirmed to contain the `public.products` table.
+
+## 25.4 Version control
+
+The project has been developed with Git and GitHub tooling in the workflow.
+
+The codebase should remain version-controlled so that changes to the frontend, backend and database-related files can be reviewed and recovered.
+
+The exact repository URL and current branch state are not established by this documentation.
+
+## 25.5 Development discipline
+
+The project should be developed incrementally.
+
+A reasonable sequence is:
+
+1. Define the requirement.
+2. Implement the relevant backend behavior.
+3. Test the backend behavior.
+4. Connect the frontend.
+5. Verify the complete workflow.
+6. Refine the user experience.
+7. Update the documentation.
+
+This sequence helps prevent the interface from appearing complete when the underlying business operation is not yet functional.
+
+---
+
+# 26. DEVELOPMENT HISTORY AND PROGRESS
+
+This section records the known implementation history.
+
+## 26.1 Project definition
+
+**Status: Established**
+
+The project identity, business location, broad business purpose and appointment-based model have been established.
+
+The initial scope was narrowed to avoid unnecessary e-commerce and infrastructure complexity.
+
+## 26.2 Frontend initialization
+
+**Status: Started**
+
+A premium Next.js template was imported as a reference.
+
+Dependencies were installed, and the local development environment was brought up successfully.
+
+The intention was to redesign the interface rather than retain the template unchanged.
+
+The final visual redesign and complete frontend functionality have not been confirmed.
+
+## 26.3 PostgreSQL installation
+
+**Status: Confirmed at the recorded checkpoint**
+
+PostgreSQL was installed locally.
+
+The `psql` command-line client was available.
+
+The local PostgreSQL server was accessed successfully.
+
+## 26.4 Database creation and connection
+
+**Status: Confirmed at the recorded checkpoint**
+
+The `sudhabelur` database was established and used during development.
+
+The backend was connected to PostgreSQL.
+
+Earlier database inspection occurred while connected to the default `postgres` database, but the project database was subsequently identified and inspected correctly.
+
+## 26.5 Product entity
+
+**Status: Created**
+
+The backend `Product` entity was created.
+
+The entity corresponds to the product data model used by the application.
+
+## 26.6 Category enum
+
+**Status: Created**
+
+The `Category` enum was created for the supported product categories.
+
+An earlier category-resolution error was discussed during development. The recorded progress subsequently advanced to a working product table and repository.
+
+## 26.7 Product table
+
+**Status: Confirmed at the recorded checkpoint**
+
+Hibernate successfully created the product table.
+
+The table was inspected through PostgreSQL and confirmed to contain the expected product fields and category constraint.
+
+## 26.8 Product repository
+
+**Status: Completed at the recorded checkpoint**
+
+`ProductRepository` was created and described as complete.
+
+The next planned step was to create the service package and implement product-related service logic.
+
+## 26.9 Appointment subsystem
+
+**Status: Required, implementation unconfirmed**
+
+Appointment functionality is central to the business model.
+
+However, the recorded checkpoint does not confirm a completed appointment entity, repository, service, controller or frontend workflow.
+
+These components must be inspected before being marked complete.
+
+## 26.10 Authentication and 2FA
+
+**Status: Requirements established, implementation unconfirmed**
+
+The need for protected administrator access and stronger authentication was established.
+
+A working authentication implementation and SMS-based 2FA have not been confirmed.
+
+## 26.11 Product images
+
+**Status: Required, implementation unconfirmed**
+
+Multiple images per product are part of the requirements.
+
+The recorded products table does not contain an image field, and a complete image storage and retrieval implementation has not been confirmed.
+
+---
+
+# 27. CURRENT IMPLEMENTATION STATUS
+
+The table below separates recorded accomplishments from work that still needs verification.
+
+| Component | Last confirmed status |
+|---|---|
+| Project scope and business model | Defined |
+| Brand name and location | Defined |
+| Next.js frontend | Initialized; customization incomplete or unverified |
+| Frontend dependency installation | Completed at the recorded checkpoint |
+| PostgreSQL installation | Completed |
+| `sudhabelur` database | Established |
+| Spring Boot database connection | Established |
+| Product entity | Created |
+| Category enum | Created |
+| `public.products` table | Created |
+| Category check constraint | Present |
+| Product repository | Completed |
+| Product service | Next recorded backend step |
+| Product controller and API | Unverified |
+| Appointment entity and database table | Unverified |
+| Appointment service and API | Unverified |
+| Product image management | Unverified |
+| Administrator authentication | Unverified |
+| Two-factor authentication | Unverified |
+| Administrative product interface | Unverified |
+| Administrative appointment interface | Unverified |
+| Full customer appointment workflow | Unverified |
+| Production deployment | Not confirmed |
+
+**Important:** "Unverified" does not necessarily mean that a component does not exist. It means the available project history does not establish that it has been implemented and tested.
+
+Before resuming development, inspect the actual frontend and backend repositories and reconcile the real state of the project with this table.
+
+---
+
+# 28. REMAINING DEVELOPMENT ROADMAP
+
+The roadmap below follows the project's established scope and recorded progress.
+
+## Phase 1: Verify the existing baseline
+
+**Goal:** Establish exactly what currently exists.
+
+Tasks:
+
+- Inspect the Next.js project structure.
+- Confirm the frontend starts successfully.
+- Inspect the Spring Boot project structure.
+- Confirm the backend starts successfully.
+- Verify the active PostgreSQL database.
+- Inspect the current product entity.
+- Inspect the category enum.
+- Inspect `ProductRepository`.
+- Verify the live product table schema.
+- Identify any existing controllers, services, appointment components or security configuration.
+- Record actual dependency versions and configuration.
+
+**Completion criterion:** The current code and database state are known, and the project can be run locally.
+
+## Phase 2: Complete the product backend
+
+**Goal:** Make the existing product model usable through the backend.
+
+Tasks:
+
+- Create the product service.
+- Implement product creation.
+- Implement product retrieval.
+- Implement product listing.
+- Implement product updates.
+- Implement availability updates.
+- Implement product deletion according to the approved retention policy.
+- Validate categories and product fields.
+- Add consistent error handling.
+- Test the product API.
+
+**Completion criterion:** Product operations behave correctly against PostgreSQL and reject invalid data.
+
+## Phase 3: Implement appointment persistence
+
+**Goal:** Establish a complete appointment domain model.
+
+Tasks:
+
+- Finalize appointment fields.
+- Define the relationship between products and appointments.
+- Define the initial status.
+- Define the product-deletion policy.
+- Create the appointment entity and database table.
+- Implement the repository.
+- Implement request creation.
+- Implement request validation.
+- Persist submission timestamps.
+- Test successful and unsuccessful requests.
+
+**Completion criterion:** A valid appointment request is stored and can be retrieved reliably.
+
+## Phase 4: Implement appointment management
+
+**Goal:** Allow the administrator to process requests.
+
+Tasks:
+
+- Implement administrator-facing appointment listing.
+- Implement appointment details.
+- Implement approval.
+- Implement rejection.
+- Validate status transitions.
+- Persist status changes.
+- Test invalid and repeated operations.
+- Ensure customers cannot invoke administrative operations.
+
+**Completion criterion:** The administrator can manage requests securely, and the database reflects every valid decision.
+
+## Phase 5: Establish administrator security
+
+**Goal:** Protect the administrative workspace.
+
+Tasks:
+
+- Select the authentication mechanism.
+- Establish the administrator credential-provisioning process.
+- Implement authentication.
+- Implement backend authorization.
+- Protect administrative API routes.
+- Configure safe session or token handling.
+- Add logout and expiry behavior.
+- Finalize the 2FA method.
+- Implement and test 2FA if required for launch.
+- Protect secrets and database credentials.
+
+**Completion criterion:** Unauthorized users cannot perform protected actions, and the agreed authentication policy works end to end.
+
+## Phase 6: Implement product images
+
+**Goal:** Support the catalogue's image requirements.
+
+Tasks:
+
+- Select an image-storage strategy.
+- Support one or more images per product.
+- Implement upload validation.
+- Store image metadata or references.
+- Return image information through the API.
+- Display images in the catalogue.
+- Handle missing or failed images gracefully.
+- Establish the image-deletion policy.
+
+**Completion criterion:** An administrator can manage product imagery and customers can view it reliably.
+
+## Phase 7: Build the public frontend
+
+**Goal:** Deliver the actual SudhaBelur customer experience.
+
+Tasks:
+
+- Finalize the visual design.
+- Implement the homepage.
+- Implement the Shop page.
+- Implement category navigation.
+- Implement product details.
+- Connect the frontend to the product API.
+- Display optional prices correctly.
+- Display unavailable status in red.
+- Implement the appointment form.
+- Connect the form to the appointment API.
+- Implement Contact Us.
+- Implement FAQs.
+- Add loading, empty and error states.
+- Verify mobile responsiveness.
+- Apply all visual-design exclusions.
+
+**Completion criterion:** Customers can discover products and submit appointment requests through the real backend.
+
+## Phase 8: Build the administrative frontend
+
+**Goal:** Make the application manageable without direct database manipulation.
+
+Tasks:
+
+- Implement administrator sign-in.
+- Implement protected administrative navigation.
+- Implement the product list.
+- Implement product creation and editing.
+- Implement availability controls.
+- Implement product image management.
+- Implement appointment listing.
+- Implement appointment details.
+- Implement approval and rejection actions.
+- Display success and failure messages.
+- Verify backend authorization.
+
+**Completion criterion:** The administrator can operate the essential business workflows through the application.
+
+## Phase 9: Integration and testing
+
+**Goal:** Verify the complete application.
+
+Tasks:
+
+- Test product creation through the UI.
+- Verify database persistence.
+- Test product updates.
+- Test availability changes.
+- Test appointment submission.
+- Test approval and rejection.
+- Test invalid input.
+- Test unauthorized access.
+- Test database failures.
+- Test mobile layouts.
+- Verify that frontend states match backend data.
+- Verify that no unsupported purchase or delivery functionality is presented.
+
+**Completion criterion:** The end-to-end workflows pass the agreed acceptance tests.
+
+## Phase 10: Deployment and launch
+
+**Goal:** Make the application usable in production.
+
+Tasks:
+
+- Select the hosting providers.
+- Configure production environment variables.
+- Configure the production database.
+- Apply the production schema.
+- Configure frontend and backend origins.
+- Configure HTTPS.
+- Verify authentication and authorization.
+- Configure backups.
+- Verify logging and error handling.
+- Test production workflows.
+- Verify the final business contact information.
+- Perform a final security review.
+
+**Completion criterion:** The deployed application works reliably and meets the agreed security and business requirements.
+
+---
+
+# 29. TESTING STRATEGY
+
+## 29.1 Unit testing
+
+Unit tests should cover isolated business rules.
+
+Examples include:
+
+- Product validation.
+- Category validation.
+- Price validation.
+- Appointment initial status.
+- Appointment status transitions.
+- Rejection of invalid operations.
+
+## 29.2 Repository and database testing
+
+Database-related tests should verify that:
+
+- Products can be saved and retrieved.
+- Category constraints behave as expected.
+- Product updates persist.
+- Appointment records persist.
+- Relationships remain consistent.
+- Invalid database operations fail safely.
+
+## 29.3 API testing
+
+API tests should cover:
+
+- Valid product requests.
+- Invalid product requests.
+- Missing product identifiers.
+- Valid appointment submissions.
+- Invalid appointment submissions.
+- Approval and rejection.
+- Unauthorized administrative requests.
+- Unexpected server errors.
+
+Postman or automated integration tests may be used as appropriate.
+
+## 29.4 Frontend testing
+
+Frontend tests should verify:
+
+- Navigation.
+- Catalogue rendering.
+- Product details.
+- Optional price rendering.
+- Availability labels.
+- Appointment form validation.
+- Submission feedback.
+- Administrative form behavior.
+- Loading and error states.
+- Responsive layouts.
+
+## 29.5 End-to-end testing
+
+The most important test is the complete business workflow.
+
+A customer submits an appointment request, the backend saves it, the administrator sees it, the administrator approves or rejects it, and the resulting status is persisted correctly.
+
+Testing isolated screens without verifying this complete sequence is insufficient.
+
+## 29.6 Security testing
+
+Security testing should verify that:
+
+- Public users cannot create or delete products.
+- Public users cannot approve appointments.
+- Unauthenticated users cannot access protected management data.
+- Invalid authentication is rejected.
+- Expired authentication cannot be reused.
+- Input validation cannot be bypassed by directly calling the API.
+- Secrets are not exposed in public responses or frontend assets.
+
+---
+
+# 30. NON-FUNCTIONAL REQUIREMENTS
+
+## 30.1 Performance
+
+The catalogue should load efficiently for a small business website.
+
+Images should be optimized, and unnecessary frontend requests should be avoided.
+
+The application does not initially require a distributed caching system.
+
+## 30.2 Reliability
+
+Product and appointment data must be persisted reliably.
+
+The application must not claim that an operation succeeded before the backend confirms the result.
+
+## 30.3 Security
+
+Administrative operations must require authorization.
+
+Customer information must be handled responsibly.
+
+Production secrets must be protected.
+
+## 30.4 Maintainability
+
+The backend should use clear separation between controllers, services, repositories and entities.
+
+The frontend should use reusable components where doing so improves consistency and maintainability.
+
+## 30.5 Usability
+
+Customers should be able to understand the service model without needing technical knowledge.
+
+The administrator should be able to complete common tasks with minimal unnecessary navigation.
+
+## 30.6 Accessibility
+
+The website should support keyboard navigation, readable content, accessible form labels and understandable error states.
+
+## 30.7 Cost efficiency
+
+The application should avoid infrastructure that is unnecessary for the MVP.
+
+The architecture should remain compatible with a future increase in usage without requiring premature investment in distributed systems.
+
+## 30.8 Compatibility
+
+The public website should work across current mainstream desktop and mobile browsers.
+
+The exact browser support matrix can be defined before launch.
+
+---
+
+# 31. RISKS AND MITIGATION
+
+## 31.1 Scope expansion
+
+**Risk:** Adding payments, delivery, customer accounts and advanced infrastructure before the core appointment workflow works.
+
+**Mitigation:** Treat the MVP scope as a boundary. New features require explicit decisions about business value, cost and implementation effort.
+
+## 31.2 Premature infrastructure complexity
+
+**Risk:** Introducing Redis, Kafka, Elasticsearch or microservices without a real need.
+
+**Mitigation:** Use the existing Next.js, Spring Boot and PostgreSQL architecture until actual requirements justify additional components.
+
+## 31.3 Weak administrative security
+
+**Risk:** Protecting admin pages only in the frontend.
+
+**Mitigation:** Enforce authentication and authorization in the backend, then verify them through direct API tests.
+
+## 31.4 Incorrect appointment semantics
+
+**Risk:** Treating submitted requests as confirmed bookings.
+
+**Mitigation:** Maintain distinct pending, approved and rejected states.
+
+## 31.5 Accidental data loss
+
+**Risk:** Deleting appointment records when a product is removed.
+
+**Mitigation:** Finalize and test the retention policy before enabling product deletion.
+
+## 31.6 Image-storage complexity
+
+**Risk:** Implementing product imagery without a clear storage strategy.
+
+**Mitigation:** Decide how images are uploaded, stored, referenced and removed before completing image management.
+
+## 31.7 Free-tier limitations
+
+**Risk:** Depending on hosting that sleeps, imposes limits or changes its terms.
+
+**Mitigation:** Validate current provider restrictions and have a realistic plan for production persistence and availability.
+
+## 31.8 Incomplete customer communication
+
+**Risk:** Customers submit requests but have no way to understand the decision later.
+
+**Mitigation:** Define the post-submission communication process before launch. Do not assume SMS or email notifications exist until implemented.
+
+## 31.9 Documentation drift
+
+**Risk:** The implementation changes while the project documentation remains outdated.
+
+**Mitigation:** Update the status table and relevant design decisions as development progresses.
+
+---
+
+# 32. EXPLICITLY EXCLUDED FEATURES
+
+The following are outside the current MVP and should not be added by default.
+
+| Feature | Current decision |
+|---|---|
+| Shopping cart | Excluded |
+| Checkout | Excluded |
+| Online payments | Excluded |
+| Automated delivery | Excluded |
+| Courier integration | Excluded |
+| Marketplace | Excluded |
+| Multi-admin management | Excluded |
+| AI features | Excluded |
+| Microservices | Excluded |
+| Redis | Excluded initially |
+| Kafka | Excluded initially |
+| Elasticsearch | Excluded initially |
+| Kubernetes | Excluded initially |
+| Docker requirement | Excluded initially |
+| CI/CD requirement | Excluded initially |
+| Category deletion | Excluded |
+| Customer accounts | Not finalized for the MVP |
+| SMS-based 2FA | Required security direction discussed; implementation/provider unconfirmed |
+
+These decisions help prevent accidental scope expansion.
+
+The exclusions can change only when the business explicitly adopts new requirements.
+
+---
+
+# 33. FUTURE ENHANCEMENTS
+
+Future ideas must remain separate from the current implementation.
+
+Potential improvements, subject to business approval, include:
+
+- Customer accounts.
+- Customer appointment history.
+- A customer-facing appointment status page.
+- Email or SMS status notifications.
+- More detailed appointment scheduling.
+- Appointment cancellation or rescheduling.
+- Improved product-image management.
+- Product search and filtering.
+- Additional catalogue information.
+- Enhanced administrative reporting.
+- Backup automation.
+- More comprehensive audit logs.
+- Expanded hosting capacity.
+
+The business has also discussed possible future expansion of product sourcing beyond the initial location. Such expansion should be treated as a future business decision rather than a requirement for the initial launch.
+
+Any future feature must be evaluated against the service-oriented business model.
+
+The project should not become a conventional e-commerce system simply because such features are common in online stores.
+
+---
+
+# 34. OPEN DECISIONS AND UNRESOLVED QUESTIONS
+
+The following items require explicit decisions or implementation verification.
+
+They are not assumed to be completed.
+
+## 34.1 Customer accounts
+
+An earlier requirement mentioned customer accounts and customer account deletion.
+
+The later simplified MVP focused on browsing and submitting appointment requests.
+
+Decision needed: Should the first release support guest appointment requests only, or require customer registration?
+
+A guest-based approach would keep the MVP simpler, but the final choice must reflect the business's needs.
+
+## 34.2 Appointment fields
+
+The minimum known fields are the customer's name, phone number and associated product or service.
+
+Decision needed: Are preferred appointment dates, times or customer comments required?
+
+## 34.3 Appointment communication
+
+Decision needed: How will a customer learn whether a request was approved or rejected?
+
+A website confirmation, an administrator contacting the customer manually, email notifications or SMS notifications are different implementation choices.
+
+## 34.4 Appointment scheduling
+
+Decision needed: Is the application only collecting requests, or must it also enforce available appointment dates and time slots?
+
+The current requirements establish manual approval but do not establish a complete scheduling engine.
+
+## 34.5 Product image storage
+
+Decision needed: Which storage service or deployment-compatible mechanism will hold product images?
+
+The implementation must also define upload limits, permitted file types and cleanup behavior.
+
+## 34.6 Product deletion
+
+Decision needed: Should product deletion remove appointment records, or should historical records be retained?
+
+This is especially important for approved appointments.
+
+## 34.7 Authentication mechanism
+
+Decision needed: Which authentication mechanism will be used for the single administrator?
+
+The choice must account for credential management, session handling, deployment and 2FA.
+
+## 34.8 Two-factor authentication
+
+Decision needed: Is SMS-based OTP mandatory for the first production release, and which provider, if any, will be used?
+
+The existing requirement is for strong administrative security with 2FA planned. A provider and completed implementation are not established.
+
+## 34.9 Hosting providers
+
+Decision needed: Where will the Next.js frontend, Spring Boot backend and PostgreSQL database run in production?
+
+Each provider must be evaluated for current cost, free-tier limitations, availability and persistence.
+
+## 34.10 Production contact details
+
+Decision needed: What official phone number, email address, opening hours and location details should the public website display?
+
+These must be verified by the business.
+
+## 34.11 Brand design
+
+Decision needed: What final color palette, typography, brand imagery and homepage copy should be approved?
+
+The overall premium design direction and explicit exclusions are established, but the final complete design system is not documented as approved.
+
+## 34.12 Product category changes
+
+Decision needed: If new categories are introduced in the future, what process will update the Java enum and PostgreSQL constraint together?
+
+The current seven categories are established. Category deletion is excluded from the initial scope.
+
+---
+
+# 35. PROJECT ACCEPTANCE CRITERIA
+
+The MVP should not be considered complete until the following requirements are satisfied.
+
+## 35.1 Customer-facing acceptance
+
+- [ ] The homepage introduces SudhaBelur.
+- [ ] The navigation contains Home, Shop, Contact Us and FAQs.
+- [ ] The catalogue displays products from the backend.
+- [ ] Products can be browsed by the supported categories.
+- [ ] Product details are displayed correctly.
+- [ ] Product images work.
+- [ ] Prices are displayed only when specified.
+- [ ] Unavailable products show the word Unavailable in red.
+- [ ] Customers can submit an appointment request.
+- [ ] The request identifies the selected product or service.
+- [ ] Required customer information is validated.
+- [ ] Submission success is displayed only after a successful backend response.
+- [ ] Submission errors are handled clearly.
+- [ ] The website works on desktop and mobile screens.
+- [ ] The interface respects the project's design exclusions.
+
+## 35.2 Administrator acceptance
+
+- [ ] The administrator can authenticate.
+- [ ] Unauthorized users cannot access protected management operations.
+- [ ] The administrator can create products.
+- [ ] The administrator can edit products.
+- [ ] The administrator can change product availability.
+- [ ] The administrator can manage product images.
+- [ ] The administrator can remove products according to the approved deletion policy.
+- [ ] The administrator can view appointment requests.
+- [ ] The administrator can approve requests.
+- [ ] The administrator can reject requests.
+- [ ] Status changes persist correctly.
+- [ ] Invalid administrative operations are rejected.
+
+## 35.3 Backend acceptance
+
+- [ ] Product operations work through the API.
+- [ ] Appointment requests are persisted.
+- [ ] Business rules are enforced in the backend.
+- [ ] Invalid category values are rejected.
+- [ ] Data validation is applied consistently.
+- [ ] Errors use predictable responses.
+- [ ] Database relationships are protected.
+- [ ] Authentication and authorization are tested.
+- [ ] Production configuration does not expose secrets.
+
+## 35.4 Deployment acceptance
+
+- [ ] The frontend is deployed.
+- [ ] The backend is deployed.
+- [ ] The production database is configured.
+- [ ] The frontend communicates with the correct backend.
+- [ ] HTTPS is configured.
+- [ ] The administrator can sign in.
+- [ ] The core workflows work in production.
+- [ ] Database persistence has been verified.
+- [ ] A backup and recovery plan exists.
+- [ ] Actual hosting costs and limits are understood.
+
+---
+
+# 36. DEFINITION OF DONE
+
+A task is not complete merely because code has been written or a page appears in the browser.
+
+A feature is complete when:
+
+1. Its business requirement is clear.
+2. Its backend behavior is implemented where required.
+3. Its data model is correct.
+4. Its validation rules are enforced.
+5. Its frontend is connected to the real backend.
+6. Expected success cases work.
+7. Expected failure cases work.
+8. Unauthorized access is rejected where applicable.
+9. Data persists correctly.
+10. The feature has been tested.
+11. The documentation reflects its actual status.
+
+For example, the product management feature is not complete just because an administrator can fill out a product form.
+
+The feature is complete when the product is validated, saved to PostgreSQL, returned through the API, displayed in the catalogue and protected against unauthorized modification.
+
+The same principle applies to appointment management.
+
+A visually complete appointment form is not a complete appointment workflow unless the request is persisted, the administrator can process it and the status is handled correctly.
+
+---
+
+# 37. FINAL PROJECT SUMMARY
+
+SudhaBelur is a full-stack website project intended to support a boutique, tailoring and embroidery business in Belur, Hassan, Karnataka.
+
+The project evolved from a broader website concept into a focused appointment-based service application.
+
+Its core purpose is to present the business professionally, display a manageable product catalogue and allow customers to request appointments.
+
+The administrator retains control over product information and appointment decisions.
+
+The selected technology stack is Next.js, Java Spring Boot and PostgreSQL.
+
+The frontend provides the public website and administrative interface. The backend implements business rules, data access and protected operations. PostgreSQL stores persistent business data.
+
+The project intentionally avoids unnecessary e-commerce functionality and infrastructure during the MVP stage.
+
+The recorded implementation has progressed through PostgreSQL installation, creation of the `sudhabelur` database, Spring Boot database connectivity, the `Product` entity, the `Category` enum, creation of the `products` table and completion of `ProductRepository`.
+
+The next recorded backend milestone is the product service layer, followed by the remaining product API, appointment subsystem, security, frontend integration, testing and deployment.
+
+The complete project must be judged by its working business workflows, not by the number of technologies used or the visual sophistication of individual pages.
+
+**The central objective is straightforward: build a secure, polished, maintainable and cost-conscious application that allows customers to discover SudhaBelur's services and request appointments, while allowing the administrator to manage the catalogue and process those requests reliably.**
+
+---
+
+## DOCUMENT MAINTENANCE
+
+This document should remain the master reference for the SudhaBelur project.
+
+When a business rule changes, update the relevant requirement and the open-decision section.
+
+When an implementation milestone is completed, update the progress table only after verifying the actual code and behavior.
+
+When a new feature is proposed, classify it as an MVP requirement, a future enhancement or an explicitly rejected feature before implementation begins.
+
+When deploying the application, update the deployment section with the actual hosting providers, environment configuration, backup policy and operational procedures.
+
+The purpose of maintaining this document is to ensure that the business model, software architecture, implementation and future decisions remain aligned throughout the project's development.
